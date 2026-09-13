@@ -139,13 +139,22 @@ h1{
 
 /* STATS */
 .stats{
-    display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+    display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;
     background:var(--border);border:1px solid var(--border);border-radius:20px;overflow:hidden;
     box-shadow:var(--shadow);margin-top:-30px;position:relative;z-index:4;
 }
-.stat{background:var(--surface);backdrop-filter:blur(12px);padding:25px;text-align:center}
-.stat strong{display:block;font-family:"Space Grotesk";font-size:1.5rem;color:var(--primary)}
-.stat span{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.stat{
+    min-width:0;
+    background:var(--surface);backdrop-filter:blur(12px);padding:25px;text-align:center;
+}
+.stat strong{
+    display:block;width:100%;font-family:"Space Grotesk";font-size:1.5rem;
+    line-height:1.2;color:var(--primary);overflow-wrap:anywhere;
+}
+.stat span{
+    display:block;width:100%;font-size:.75rem;line-height:1.5;
+    color:var(--muted);text-transform:uppercase;letter-spacing:.08em;overflow-wrap:anywhere;
+}
 
 /* SECTIONS */
 section{padding:100px 0}
@@ -385,7 +394,37 @@ footer{background:#080d18;color:#9aa7ba;text-align:center;padding:35px 20px;font
     nav ul{margin-top:6px}
     #home{padding-top:125px}
     h1{font-size:3rem}
-    .stats{grid-template-columns:1fr 1fr}
+
+    /* MOBILE STATS — prevents text from overflowing narrow cards */
+    .stats{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        width:100%;
+        border-radius:20px;
+    }
+    .stat{
+        min-width:0;
+        padding:20px 10px;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        min-height:125px;
+    }
+    .stat strong{
+        width:100%;
+        font-size:clamp(.92rem,4.8vw,1.35rem);
+        line-height:1.2;
+        overflow-wrap:anywhere;
+        word-break:break-word;
+    }
+    .stat span{
+        width:100%;
+        margin-top:9px;
+        font-size:.68rem;
+        line-height:1.55;
+        overflow-wrap:anywhere;
+    }
+
     .project-grid,.automation-projects{grid-template-columns:1fr}
     section{padding:75px 0}
     .section-head{display:block}
@@ -395,6 +434,17 @@ footer{background:#080d18;color:#9aa7ba;text-align:center;padding:35px 20px;font
     .edu-dot,.edu:nth-child(even) .edu-dot{left:0;right:auto}
     .resume-btn{right:14px;bottom:14px}
     .top-btn{left:14px;bottom:14px}
+}
+
+/* Extra-small phones */
+@media(max-width:380px){
+    .container{width:94%}
+    .stat{
+        padding:17px 7px;
+        min-height:118px;
+    }
+    .stat strong{font-size:.9rem}
+    .stat span{font-size:.62rem;letter-spacing:.06em}
 }
 @media(prefers-reduced-motion:reduce){
     *,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}
