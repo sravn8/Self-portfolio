@@ -139,13 +139,22 @@ h1{
 
 /* STATS */
 .stats{
-    display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+    display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;
     background:var(--border);border:1px solid var(--border);border-radius:20px;overflow:hidden;
     box-shadow:var(--shadow);margin-top:-30px;position:relative;z-index:4;
 }
-.stat{background:var(--surface);backdrop-filter:blur(12px);padding:25px;text-align:center}
-.stat strong{display:block;font-family:"Space Grotesk";font-size:1.5rem;color:var(--primary)}
-.stat span{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.stat{
+    min-width:0;
+    background:var(--surface);backdrop-filter:blur(12px);padding:25px;text-align:center;
+}
+.stat strong{
+    display:block;width:100%;font-family:"Space Grotesk";font-size:1.5rem;
+    line-height:1.2;color:var(--primary);overflow-wrap:anywhere;
+}
+.stat span{
+    display:block;width:100%;font-size:.75rem;line-height:1.5;
+    color:var(--muted);text-transform:uppercase;letter-spacing:.08em;overflow-wrap:anywhere;
+}
 
 /* SECTIONS */
 section{padding:100px 0}
@@ -197,9 +206,6 @@ h2{font-family:"Space Grotesk";font-size:clamp(2rem,5vw,3.3rem);letter-spacing:-
 .automation-wrap{
     display:grid;grid-template-columns:.85fr 1.15fr;gap:24px;align-items:stretch
 }
-.auto-project-image{width:100%;height:190px;border-radius:16px;overflow:hidden;margin-bottom:20px;background:var(--bg-soft);border:1px solid var(--border)}
-.auto-project-image img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .45s ease}
-.auto-card:hover .auto-project-image img{transform:scale(1.05)}
 .auto-panel{
     background:linear-gradient(145deg,#0b1220,#111c33);color:#fff;border-radius:25px;padding:35px;
     position:relative;overflow:hidden;box-shadow:0 25px 65px rgba(2,6,23,.25)
@@ -282,18 +288,6 @@ h2{font-family:"Space Grotesk";font-size:clamp(2rem,5vw,3.3rem);letter-spacing:-
     animation:modalIn .3s ease
 }
 @keyframes modalIn{from{opacity:0;transform:translateY(25px) scale(.98)}to{opacity:1;transform:none}}
-/* P&L opens as an immersive full-screen presentation; other project modals stay unchanged. */
-.modal.pnl-fullscreen{padding:0;align-items:stretch;justify-content:stretch;backdrop-filter:blur(0);background:var(--bg)}
-.modal.pnl-fullscreen .modal-content{width:100%;height:100dvh;max-height:100dvh;max-width:none;overflow:auto;border:0;border-radius:0;box-shadow:none;animation:pnlEnter .42s cubic-bezier(.2,.75,.25,1)}
-.modal.pnl-fullscreen .close-modal{position:fixed;z-index:10002;top:14px;right:16px;float:none;margin:0;width:42px;height:42px;background:rgba(255,255,255,.94);border:1px solid #dbe3ed;color:#17263d;box-shadow:0 8px 25px rgba(0,0,0,.14)}
-.modal.pnl-fullscreen .modal-body{padding:0;max-width:none}
-.modal.pnl-fullscreen .pnl-live{border-radius:0;box-shadow:none;margin:0;min-height:100vh}
-.modal.pnl-fullscreen .pnl-live-head{position:sticky;top:0;z-index:5;padding:20px 76px 18px 26px}
-.modal.pnl-fullscreen .pnl-live-body{padding:22px clamp(14px,3vw,42px) 36px}
-.modal.pnl-fullscreen .modal-icon,.modal.pnl-fullscreen #modalBody>h3,.modal.pnl-fullscreen #modalBody>p,.modal.pnl-fullscreen #modalBody>.tags,.modal.pnl-fullscreen #modalBody>.modal-section{display:none}
-@keyframes pnlEnter{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-@media(max-width:650px){.modal.pnl-fullscreen .pnl-live-head{padding:16px 66px 15px 16px}.modal.pnl-fullscreen .pnl-live-body{padding:14px}}
-
 .close-modal{
     position:sticky;
     float:right;
@@ -380,13 +374,6 @@ h2{font-family:"Space Grotesk";font-size:clamp(2rem,5vw,3.3rem);letter-spacing:-
 footer{background:#080d18;color:#9aa7ba;text-align:center;padding:35px 20px;font-size:.78rem}
 
 /* MOBILE */
-
-/* MODERN P&L CASE STUDY */
-.pnl-thumb{height:100%;padding:15px;background:radial-gradient(circle at 90% 0%,#315b91 0,transparent 38%),linear-gradient(135deg,#0b1220,#13253b);color:#f8fafc;display:flex;flex-direction:column;gap:10px;overflow:hidden}
-.pnl-thumb-top{display:flex;justify-content:space-between;align-items:center;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#c4d5e8;font-weight:800}.pnl-thumb-pills{display:flex;gap:6px}.pnl-thumb-pills i{height:28px;flex:1;border:1px solid #ffffff20;border-radius:7px;background:#ffffff0d;display:block}.pnl-thumb-chart{height:75px;display:flex;align-items:flex-end;gap:7px;padding:8px 3px 0;border-bottom:1px solid #ffffff2b;background:repeating-linear-gradient(to top,transparent 0,transparent 22px,#ffffff12 23px)}.pnl-thumb-chart b{display:block;flex:1;border-radius:4px 4px 0 0;background:linear-gradient(#55b6f2,#3678d4);animation:pnlRise .8s both;transform-origin:bottom}.pnl-thumb-foot{display:flex;gap:6px}.pnl-thumb-foot i{height:18px;display:block;flex:1;border-radius:5px;background:#ffffff12;border:1px solid #ffffff12}
-.pnl-live{border:1px solid var(--border);border-radius:18px;overflow:hidden;margin:22px 0;background:var(--surface);box-shadow:var(--shadow)}.pnl-live-head{display:flex;justify-content:space-between;gap:14px;align-items:center;padding:17px 19px;background:linear-gradient(110deg,#101d31,#1d4262);color:#fff}.pnl-live-head strong{font-family:'Space Grotesk';font-size:1rem}.pnl-live-head small{color:#c7d8e8}.pnl-live-body{padding:16px;background:var(--bg-soft)}.pnl-live-controls{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.pnl-live-controls button{border:1px solid var(--border);background:var(--surface);color:var(--text);border-radius:9px;padding:8px 11px;font-size:.75rem;font-weight:800;cursor:pointer}.pnl-live-controls button.active,.pnl-live-controls button:hover{background:var(--primary);border-color:var(--primary);color:#fff}.pnl-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:12px}.pnl-kpi{padding:13px;border-radius:12px;background:var(--surface);border:1px solid var(--border);border-top:3px solid #4386d6;animation:pnlRise .55s both}.pnl-kpi:nth-child(2){border-top-color:#27a37c;animation-delay:.08s}.pnl-kpi:nth-child(3){border-top-color:#d6a34b;animation-delay:.16s}.pnl-kpi label{display:block;color:var(--muted);font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;font-weight:800}.pnl-kpi strong{display:block;font-size:1.35rem;margin:7px 0;letter-spacing:.06em}.pnl-kpi small{color:var(--muted);font-size:.68rem}.pnl-visual-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:12px}.pnl-box{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px;min-width:0}.pnl-box h4{margin:0 0 4px;font-size:.9rem;color:var(--text)}.pnl-box p{font-size:.72rem;margin:0;color:var(--muted)}.pnl-bars{height:145px;display:flex;align-items:flex-end;gap:clamp(4px,1vw,10px);padding:14px 2px 0;border-bottom:1px solid var(--border);background:repeating-linear-gradient(to top,transparent 0,transparent 35px,var(--border) 36px)}.pnl-bar-group{height:100%;flex:1;display:flex;align-items:flex-end;justify-content:center;gap:3px;min-width:0}.pnl-bar{width:40%;max-width:20px;border-radius:4px 4px 0 0;background:#9aacc1;transform-origin:bottom;animation:pnlRise .7s both}.pnl-bar.current{background:#3d82cf}.pnl-months{display:flex;justify-content:space-between;gap:3px;margin-top:7px;color:var(--muted);font-size:.58rem}.pnl-mini-bars{height:145px;display:flex;align-items:flex-end;gap:7px;padding-top:12px;border-bottom:1px solid var(--border);background:repeating-linear-gradient(to top,transparent 0,transparent 35px,var(--border) 36px)}.pnl-mini-bars i{display:block;flex:1;max-width:24px;margin:0 auto;background:#39a888;border-radius:4px 4px 0 0;transform-origin:bottom;animation:pnlRise .75s both}.pnl-expense-list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:12px}.pnl-expense{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:10px}.pnl-expense strong{display:block;font-size:.73rem}.pnl-expense span{display:block;font-size:.65rem;color:var(--muted);margin-top:4px}.pnl-comment{margin-top:12px;border:1px dashed var(--border);background:var(--surface);border-radius:10px;padding:13px;color:var(--muted);font-size:.75rem}.pnl-comment strong{color:var(--text)}@keyframes pnlRise{from{opacity:.3;transform:translateY(9px) scaleY(.15)}to{opacity:1;transform:translateY(0) scaleY(1)}}
-@media(max-width:650px){.pnl-kpis{grid-template-columns:1fr}.pnl-visual-grid{grid-template-columns:1fr}.pnl-expense-list{grid-template-columns:repeat(2,minmax(0,1fr))}.pnl-live-head{align-items:flex-start;flex-direction:column}.pnl-live-body{padding:10px}}
-
 @media(max-width:900px){
     .hero{grid-template-columns:1fr;text-align:center;gap:30px}
     .hero-copy{margin:auto}
@@ -407,7 +394,37 @@ footer{background:#080d18;color:#9aa7ba;text-align:center;padding:35px 20px;font
     nav ul{margin-top:6px}
     #home{padding-top:125px}
     h1{font-size:3rem}
-    .stats{grid-template-columns:1fr 1fr}
+
+    /* MOBILE STATS — prevents text from overflowing narrow cards */
+    .stats{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        width:100%;
+        border-radius:20px;
+    }
+    .stat{
+        min-width:0;
+        padding:20px 10px;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        min-height:125px;
+    }
+    .stat strong{
+        width:100%;
+        font-size:clamp(.92rem,4.8vw,1.35rem);
+        line-height:1.2;
+        overflow-wrap:anywhere;
+        word-break:break-word;
+    }
+    .stat span{
+        width:100%;
+        margin-top:9px;
+        font-size:.68rem;
+        line-height:1.55;
+        overflow-wrap:anywhere;
+    }
+
     .project-grid,.automation-projects{grid-template-columns:1fr}
     section{padding:75px 0}
     .section-head{display:block}
@@ -417,6 +434,17 @@ footer{background:#080d18;color:#9aa7ba;text-align:center;padding:35px 20px;font
     .edu-dot,.edu:nth-child(even) .edu-dot{left:0;right:auto}
     .resume-btn{right:14px;bottom:14px}
     .top-btn{left:14px;bottom:14px}
+}
+
+/* Extra-small phones */
+@media(max-width:380px){
+    .container{width:94%}
+    .stat{
+        padding:17px 7px;
+        min-height:118px;
+    }
+    .stat strong{font-size:.9rem}
+    .stat span{font-size:.62rem;letter-spacing:.06em}
 }
 @media(prefers-reduced-motion:reduce){
     *,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}
@@ -437,7 +465,7 @@ footer{background:#080d18;color:#9aa7ba;text-align:center;padding:35px 20px;font
 <!-- NAV -->
 <nav id="navbar">
     <div class="menu-row">
-        <a href="#home" style="font-family:'Space Grotesk';font-weight:800">SN.</a>
+        <a href="#home" style="font-family:'Space Grotesk';font-weight: 400">SN.</a>
         <button class="menu-btn" onclick="toggleMenu()">☰</button>
     </div>
     <ul>
@@ -452,7 +480,7 @@ footer{background:#080d18;color:#9aa7ba;text-align:center;padding:35px 20px;font
 </nav>
 
 <!-- Keep your own local PDF path here -->
-<a href="C:\Users\srava\OneDrive\Desktop\Selfportfolio\SravanNew.pdf" class="resume-btn" download>📥 Resume</a>
+<a href=N.Sravan_Resume.pdf class="resume-btn" download>📥 Resume</a>
 <button class="top-btn" id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <!-- HERO -->
@@ -460,7 +488,7 @@ footer{background:#080d18;color:#9aa7ba;text-align:center;padding:35px 20px;font
     <div class="container hero">
         <div class="reveal">
             <div class="eyebrow"><span class="dot"></span> Data • Finance • Automation</div>
-            <h1>Hi, I'm <span class="gradient-text">Sravan.</span></h1>
+            <h2>Hi, I'm <span class="gradient-text">Sravan Nedunuri.</span></h2>
             <p class="hero-copy">
                 I turn business data into dashboards, insights and automated workflows —
                 combining analytics, FP&A thinking and practical process automation.
@@ -473,8 +501,9 @@ footer{background:#080d18;color:#9aa7ba;text-align:center;padding:35px 20px;font
 
         <div class="hero-visual reveal">
             <div class="orbit">
-                <div class="core">📊</div>
-                <div class="orbit-card oc1">Power BI</div>
+                <div class="core">📊📈🔢🧮</div>
+                <div class="orbit-card oc5">Adv•Excel</div>
+                <div class="orbit-card oc1">Power•BI</div>
                 <div class="orbit-card oc2">SQL</div>
                 <div class="orbit-card oc3">Python</div>
                 <div class="orbit-card oc4">Automation</div>
@@ -487,8 +516,8 @@ footer{background:#080d18;color:#9aa7ba;text-align:center;padding:35px 20px;font
     <div class="stats reveal">
         <div class="stat"><strong>2+ Years</strong><span>Analytics Experience</span></div>
         <div class="stat"><strong>4+ Live</strong><span>Business Dashboards</span></div>
-        <div class="stat"><strong>SQL • BI</strong><span>Core Analytics</span></div>
-        <div class="stat"><strong>SAP • SF</strong><span>Automation</span></div>
+        <div class="stat"><strong>Excel•Bi•Py</strong><span>Core Analytics</span></div>
+        <div class="stat"><strong>SAP•SalesForce</strong><span>Python•Automation</span></div>
     </div>
 </div>
 
@@ -508,28 +537,11 @@ footer{background:#080d18;color:#9aa7ba;text-align:center;padding:35px 20px;font
     </div>
 
     <div class="project-grid">
-        <article class="project-card reveal" data-category="powerbi excel" onclick="openProject('pnl', this)">
-            <div class="project-image">
-                <div class="pnl-thumb" aria-label="Illustrative P and L dashboard preview">
-                    <div class="pnl-thumb-top"><span>Financial performance</span><span>YTD · —</span></div>
-                    <div class="pnl-thumb-pills"><i></i><i></i><i></i></div>
-                    <div class="pnl-thumb-chart">
-                        <b style="height:48%"></b><b style="height:69%"></b><b style="height:55%"></b><b style="height:82%"></b><b style="height:63%"></b><b style="height:74%"></b><b style="height:45%"></b><b style="height:88%"></b><b style="height:61%"></b>
-                    </div><div class="pnl-thumb-foot"><i></i><i></i><i></i></div>
-                </div><span class="project-badge">FP&amp;A • POWER BI</span>
-            </div>
-            <div class="project-info">
-                <h3>P&amp;L Performance &amp; Cost Analysis</h3>
-                <p>Executive financial overview with budget variance, profitability trends and departmental expense analysis.</p>
-                <div class="tags"><span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">FP&amp;A</span><span class="tag">Power Query</span></div>
-                <div class="project-link">Explore interactive case study →</div>
-            </div>
-        </article>
         <article class="project-card reveal" data-category="powerbi sql excel"
                  onclick="openProject('email', this)">
             <div class="project-image">
-                <img src="C:\Users\srava\OneDrive\Desktop\Selfportfolio\images\img6.png" alt="Email Tickets Performance">
-                <span class="project-badge">POWER BI • SQL</span>
+                <img src=img6.png alt="Email Tickets Performance">
+                <span class="project-badge">Ticket Analysis With TAT</span>
             </div>
             <div class="project-info">
                 <h3>Email Tickets Performance</h3>
@@ -542,7 +554,7 @@ footer{background:#080d18;color:#9aa7ba;text-align:center;padding:35px 20px;font
         <article class="project-card reveal" data-category="powerbi excel"
                  onclick="openProject('call', this)">
             <div class="project-image">
-                <img src="C:\Users\srava\OneDrive\Desktop\Selfportfolio\images\img5.png" alt="Call Center Performance">
+                <img src=img5.png alt="Call Center Performance">
                 <span class="project-badge">OPERATIONS</span>
             </div>
             <div class="project-info">
@@ -556,7 +568,7 @@ footer{background:#080d18;color:#9aa7ba;text-align:center;padding:35px 20px;font
         <article class="project-card reveal" data-category="powerbi sql"
                  onclick="openProject('pizza', this)">
             <div class="project-image">
-                <img src="C:\Users\srava\OneDrive\Desktop\selfportfolio\images\img4.png" alt="Pizza Sales Dashboard">
+                <img src=img4.png alt="Pizza Sales Dashboard">
                 <span class="project-badge">SALES ANALYTICS</span>
             </div>
             <div class="project-info">
@@ -570,13 +582,13 @@ footer{background:#080d18;color:#9aa7ba;text-align:center;padding:35px 20px;font
         <article class="project-card reveal" data-category="powerbi excel"
                  onclick="openProject('service', this)">
             <div class="project-image">
-                <img src="C:\Users\srava\OneDrive\Desktop\Selfportfolio\images\img7.png" alt="Service Level Analysis">
+                <img src=img7.png alt="Service Level Analysis">
                 <span class="project-badge">SERVICE LEVEL</span>
             </div>
             <div class="project-info">
                 <h3>Service Level Analysis</h3>
                 <p>Visualizing response times and agent efficiency metrics.</p>
-                <div class="tags"><span class="tag">Power BI</span><span class="tag">Advanced Excel</span></div>
+                <div class="tags"><span class="tag">Power BI</span><span class="tag">Advanced Excel</span><span class="tag">SQL</span></div>
                 <div class="project-link">View case study →</div>
             </div>
         </article>
@@ -584,7 +596,7 @@ footer{background:#080d18;color:#9aa7ba;text-align:center;padding:35px 20px;font
         <article class="project-card reveal" data-category="powerbi excel"
                  onclick="openProject('superstore', this)">
             <div class="project-image">
-                <img src="C:\Users\srava\OneDrive\Desktop\Selfportfolio\images\img2.png" alt="Super Store Analysis">
+                <img src=img2.png alt="Super Store Analysis">
                 <span class="project-badge">BUSINESS ANALYTICS</span>
             </div>
             <div class="project-info">
@@ -598,7 +610,7 @@ footer{background:#080d18;color:#9aa7ba;text-align:center;padding:35px 20px;font
         <article class="project-card reveal" data-category="powerbi excel"
                  onclick="openProject('ticket', this)">
             <div class="project-image">
-                <img src="C:\Users\srava\OneDrive\Desktop\Selfportfolio\images\img3.png" alt="Email Ticket Analysis">
+                <img src=img3.png alt="Email Ticket Analysis">
                 <span class="project-badge">TICKET ANALYTICS</span>
             </div>
             <div class="project-info">
@@ -634,13 +646,13 @@ footer{background:#080d18;color:#9aa7ba;text-align:center;padding:35px 20px;font
         </div>
 
         <div class="automation-projects">
-            <article class="auto-card reveal" onclick="openProject('sap', this)">
-                <div class="auto-project-image">
-                    <img src="images/sap-salesforce-invoice-automation.png" alt="SAP and Salesforce Invoice Automation">
+            <article class="auto-card reveal" onclick="openProject('sap')">
+                <div class="auto-icon">🔷</div>
+                <h3>SAP Automation</h3>
+                <p>Python-based workflow automation for SAP-related data extraction.</p>
+                <div class="tags">
+                    <span class="tag">Python</span><span class="tag">SAP</span><span class="tag">Automation</span>
                 </div>
-                <h3>SAP + Salesforce Invoice Automation</h3>
-                <p>End-to-end Python automation connecting SAP, Excel and Salesforce for invoice processing.</p>
-                <div class="tags"><span class="tag">Python</span><span class="tag">SAP</span><span class="tag">Salesforce</span><span class="tag">Automation</span></div>
                 <div class="project-link">Explore automation →</div>
             </article>
 
@@ -705,12 +717,14 @@ footer{background:#080d18;color:#9aa7ba;text-align:center;padding:35px 20px;font
             <h3 style="font-family:'Space Grotesk';font-size:1.5rem">Experience</h3>
             <div class="experience" style="margin-top:18px">
                 <div class="exp">
-                    <div class="exp-top"><h3>FP&A / MIS Analyst</h3><small>Present</small></div>
-                    <p>EC-Council — Finance, reporting, analysis and process-focused work.</p>
+                    <div class="exp-top"><h3>FP&A / MIS Analyst</h3><small>Current Occupation</small></div>
+                    <p><strong>EC-Council</strong> — Finance, reporting, analysis and process-focused work.</p>
+                    <p>May'2026 - Present</p>
                 </div>
                 <div class="exp">
-                    <div class="exp-top"><h3>Data Analyst / MIS Executive</h3><small>Previous</small></div>
-                    <p>KFin Technologies — MIS reporting, data analysis, dashboards and business reporting.</p>
+                    <div class="exp-top"><h3>Data Analyst / MIS Executive</h3><small>Previous Work Experience</small></div>
+                    <p><strong>KFin Technologies</strong> — MIS reporting, data analysis, dashboards and business reporting.</p>
+                    <p>Aug'2024 - Apr'2026</p>
                 </div>
             </div>
         </div>
@@ -727,7 +741,7 @@ footer{background:#080d18;color:#9aa7ba;text-align:center;padding:35px 20px;font
     <div class="timeline">
         <div class="edu reveal">
             <span class="edu-dot"></span>
-            <div class="edu-box"><small>2021 — 2024</small><h3>B.S. / B.Sc. Computer Science & Statistics</h3><p>Undergraduate degree • 85%</p></div>
+            <div class="edu-box"><small>2021 — 2024</small><h3>B.S. / B.Sc. Computer Science & Statistics</h3><p>UG • 85%</p></div>
         </div>
         <div class="edu reveal">
             <span class="edu-dot"></span>
@@ -746,7 +760,7 @@ footer{background:#080d18;color:#9aa7ba;text-align:center;padding:35px 20px;font
 <div class="container">
     <div class="section-head reveal">
         <div><div class="kicker">Contact</div><h2>Let's build something useful.</h2></div>
-        <p>Have a reporting, analytics or automation requirement? Send me a message.</p>
+        <p>Need a reporting, analytics or automation requirement? Send me a message.</p>
     </div>
 
     <div class="contact-grid">
@@ -756,7 +770,7 @@ footer{background:#080d18;color:#9aa7ba;text-align:center;padding:35px 20px;font
 
             <div class="contact-item">
                 <span>Email</span>
-                <a href="mailto:nedunurisravan5@gmail.com">nedunurisravan5@gmail.com</a>
+                <a href="mailto:sravan.n893@gmail.com">sravan.n893@gmail.com</a>
             </div>
             <div class="contact-item">
                 <span>Alternate Email</span>
@@ -782,8 +796,8 @@ footer{background:#080d18;color:#9aa7ba;text-align:center;padding:35px 20px;font
 </section>
 
 <footer>
-    <p>&copy; <span id="currentYear"></span> Sravan Nedunuri. All Rights Reserved.</p>
-    <p style="margin-top:5px;opacity:.55">Designed & Developed by Sravan Nedunuri.</p>
+    <p>&copy; <span id="currentYear"></span> All Rights Reserved.</p>
+    <p style="margin-top:5px;opacity:.55">Designed & Developed by<h4>Sravan Nedunuri.</h4></p>
 </footer>
 
 <script>
@@ -808,14 +822,6 @@ document.querySelectorAll('nav a').forEach(a=>a.addEventListener('click',()=>doc
 
 /* PROJECT DATA */
 const projects={
-    pnl:{
-        icon:'📊',title:'P&L Performance & Departmental Cost Analysis',
-        description:'A management-focused financial reporting experience combining executive KPIs, prior-year versus current-year analysis, budget variance, monthly profitability trends and department-level cost exploration. This portfolio demo intentionally hides all financial figures and vendor values.',
-        tags:['Power BI','DAX','Power Query','FP&A','Budget vs Actual','Departmental Cost Analysis'],
-        insights:['Designed an executive overview for revenue, gross profit and EBITDA.','Structured comparisons across prior year, current year and budget.','Organized expenses into salaries, IT, marketing and other cost categories.','Planned drill-down analysis from financial summary to department, vendor and tool/service detail.','Management commentary is intended to appear only for selected departments with supplied commentary.'],
-        dashboard:true,
-        note:'All amounts and vendor-level values are intentionally hidden in this public portfolio mockup. Monthly and category-wise detail can be expanded when the sanitized data is ready.'
-    },
     email:{
         icon:'📧',title:'Email Tickets Performance',
         description:'Power BI, SQL and Excel dashboard focused on email status, turnaround time and team productivity.',
@@ -853,11 +859,11 @@ const projects={
         insights:['Tracked ticket status and turnaround time.','Presented productivity indicators.','Supported recurring operational reporting.']
     },
     sap:{
-        icon:'🔷',title:'SAP + Salesforce Invoice Automation',
-        description:'End-to-end Python automation connecting SAP, an Excel control file and Salesforce for invoice processing.',
-        tags:['Python','SAP','Salesforce','Excel','Automation'],
-        insights:['Automated invoice PDF downloads from SAP (Fiori).','Used an Excel control file for mapping and status tracking.','Automated invoice PDF uploads to Salesforce.','Reduced manual effort and repetitive invoice-processing tasks.','Designed the workflow to be accurate, reliable and user-friendly.'],
-        note:'This project is presented at a portfolio level. Specific internal system screens, credentials, URLs and company-sensitive implementation details should not be exposed publicly.'
+        icon:'🔷',title:'SAP Automation',
+        description:'Python-based automation work around SAP-related data extraction and reporting processes.',
+        tags:['Python','SAP','Automation'],
+        insights:['Automated repetitive steps in an SAP-related reporting workflow.','Focused on extracting and structuring business data for downstream reporting.','Reduced dependency on repeated manual processing.'],
+        note:'This project is presented at a portfolio level. Specific internal SAP screens, credentials and company-sensitive implementation details should not be exposed publicly.'
     },
     salesforce:{
         icon:'☁️',title:'Salesforce Automation',
@@ -889,48 +895,35 @@ function openProject(key, card=null){
 
     // For dashboard projects, use the exact image from the clicked project card.
     const imageSrc=card?.querySelector('img')?.getAttribute('src');
-    const pnlDashboard=`<div class="pnl-live" id="pnlLiveDashboard">
-      <div class="pnl-live-head"><div><strong>Financial performance</strong><br><small>Illustrative dashboard · values concealed</small></div><small>SELECTED PERIOD · —</small></div>
-      <div class="pnl-live-body">
-        <div class="pnl-live-controls"><button class="active" data-pnl-view="yearly">Yearly view</button><button data-pnl-view="monthly">Monthly view</button><button data-pnl-view="category">Category view</button><button data-pnl-view="vendors">Vendor / tool detail</button></div>
-        <div class="pnl-kpis"><div class="pnl-kpi"><label>Revenue</label><strong>— — —</strong><small>Budget / actual · hidden</small></div><div class="pnl-kpi"><label>Gross profit</label><strong>— — —</strong><small>Margin · hidden</small></div><div class="pnl-kpi"><label>EBITDA</label><strong>— — —</strong><small>Variance · hidden</small></div></div>
-        <div class="pnl-visual-grid"><div class="pnl-box"><h4 id="pnlChartTitle">Financial overview</h4><p id="pnlChartSub">Prior year vs current year · illustrative shapes only</p><div class="pnl-bars" id="pnlMainBars"></div><div class="pnl-months"><span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span></div></div><div class="pnl-box"><h4>Expense composition</h4><p>Departmental category overview</p><div class="pnl-mini-bars" id="pnlMiniBars"></div><div class="pnl-months"><span>Salary</span><span>IT</span><span>Mktg</span><span>Other</span><span>Ops</span><span>Admin</span></div></div></div>
-        <div class="pnl-expense-list"><div class="pnl-expense"><strong>Salaries</strong><span>People-related costs</span></div><div class="pnl-expense"><strong>IT expenses</strong><span>Tools &amp; services</span></div><div class="pnl-expense"><strong>Marketing</strong><span>Campaign costs</span></div><div class="pnl-expense"><strong>Other</strong><span>Operating costs</span></div></div>
-        <div class="pnl-comment"><strong>Management commentary · selected departments only</strong><br>Commentary will appear here only when it has been provided for the selected department and period. Otherwise, this section remains empty.</div>
-      </div></div>`;
-    const imageHtml=p.dashboard ? pnlDashboard : (imageSrc
-        ? `<div class="modal-project-image"><img src="${imageSrc}" alt="${p.title} project preview"></div>`
-        : `<div class="modal-project-visual"><span>${p.icon}</span></div>`);
+    const imageHtml=imageSrc
+        ? `<div class="modal-project-image">
+               <img src="${imageSrc}" alt="${p.title} dashboard preview">
+           </div>`
+        : `<div class="modal-project-visual">
+               <span>${p.icon}</span>
+           </div>`;
 
     document.getElementById('modalBody').innerHTML=`
-        ${imageHtml}<div class="modal-icon">${p.icon}</div><h3>${p.title}</h3><p>${p.description}</p><div class="tags">${tags}</div>
-        <div class="modal-section"><h4>Key Highlights</h4><ul class="modal-list">${insights}</ul></div>
-        ${p.note?`<div class="modal-section"><h4>Portfolio Note</h4><p>${p.note}</p></div>`:''}
+        ${imageHtml}
+        <div class="modal-icon">${p.icon}</div>
+        <h3>${p.title}</h3>
+        <p>${p.description}</p>
+        <div class="tags">${tags}</div>
+        <div class="modal-section">
+            <h4>Key Highlights</h4>
+            <ul class="modal-list">${insights}</ul>
+        </div>
+        ${p.note?`<div class="modal-section"><h4>Note</h4><p>${p.note}</p></div>`:''}
     `;
-    if(p.dashboard) initPnlDemo();
 
     const modal=document.getElementById('projectModal');
-    modal.classList.toggle('pnl-fullscreen', Boolean(p.dashboard));
     modal.classList.add('open');
     modal.setAttribute('aria-hidden','false');
     document.body.style.overflow='hidden';
 }
-function initPnlDemo(){
-  const root=document.getElementById('pnlMainBars'),mini=document.getElementById('pnlMiniBars');
-  if(!root||!mini)return;
-  const old=[42,60,51,72,48,66,78,55,69,47,74,62],cur=[61,49,73,56,68,79,52,70,58,76,63,71];
-  function draw(mode){root.innerHTML='';mini.innerHTML='';
-    old.forEach((v,i)=>{const g=document.createElement('div');g.className='pnl-bar-group';let h1=mode==='monthly'?(i===8?86:14):mode==='category'?[42,72,56,64,39,58,74,47,69,53,62,44][i]:v;let h2=mode==='monthly'?(i===8?72:10):mode==='category'?[58,54,77,49,67,42,61,75,46,68,51,72][i]:cur[i];g.innerHTML=`<i class="pnl-bar" style="height:${h1}%;animation-delay:${i*.025}s"></i><i class="pnl-bar current" style="height:${h2}%;animation-delay:${i*.025+.04}s"></i>`;root.append(g)});
-    [48,75,56,84,63,71].forEach((v,i)=>{let b=document.createElement('i');b.style.height=(mode==='vendors'?[38,66,80,47,71,58][i]:v)+'%';b.style.animationDelay=(i*.05)+'s';mini.append(b)});
-    const titles={yearly:'Financial overview',monthly:'Selected month spotlight',category:'Category comparison',vendors:'Vendor / tool detail'};document.getElementById('pnlChartTitle').textContent=titles[mode]||titles.yearly;
-    document.getElementById('pnlChartSub').textContent=mode==='vendors'?'Vendor and tool-level layout · values hidden':mode==='category'?'Category view · illustrative shapes only':mode==='monthly'?'Selected period highlighted · no source values':'Prior year vs current year · illustrative shapes only';
-  }
-  draw('yearly');document.querySelectorAll('[data-pnl-view]').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('[data-pnl-view]').forEach(b=>b.classList.toggle('active',b===btn));draw(btn.dataset.pnlView)}));
-}
-
 function closeModal(){
     const modal=document.getElementById('projectModal');
-    modal.classList.remove('open','pnl-fullscreen');
+    modal.classList.remove('open');
     modal.setAttribute('aria-hidden','true');
     document.body.style.overflow='';
 }
