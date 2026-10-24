@@ -133,8 +133,13 @@ h1{
     background:var(--surface);backdrop-filter:blur(15px);border-radius:14px;
     box-shadow:var(--shadow);font-size:.78rem;font-weight:800;
 }
-.oc1{top:4%;right:4%}.oc2{bottom:10%;left:0}.oc3{top:45%;right:-6%}
-.oc4{bottom:0;right:25%}
+/* Six skills spaced around the circular orbit */
+.oc1{top:2%;left:50%;transform:translateX(-50%)}
+.oc2{top:22%;right:-5%}
+.oc3{bottom:22%;right:-5%}
+.oc4{bottom:2%;left:50%;transform:translateX(-50%)}
+.oc5{bottom:22%;left:-5%}
+.oc6{top:22%;left:-5%}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* STATS */
@@ -414,7 +419,7 @@ footer{background:#080d18;color:#9aa7ba;text-align:center;padding:35px 20px;font
 .pnl-preview-chart{height:72px;display:flex;align-items:flex-end;gap:7px;padding:7px 5px 0;border-bottom:1px solid #ffffff2c;background:repeating-linear-gradient(to top,transparent 0,transparent 23px,#ffffff12 24px)}
 .pnl-preview-chart i{flex:1;display:block;max-width:24px;border-radius:4px 4px 0 0;background:linear-gradient(#6eb5ff,#2b6cb0)}
 /* Full-screen P&L presentation */
-.pnl-presentation{position:fixed;inset:0;z-index:99999;background:#08111f;color:#eaf1fb;overflow:auto;opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .3s ease,transform .3s ease,visibility .3s}
+.pnl-presentation{color-scheme:dark;isolation:isolate;position:fixed;inset:0;z-index:99999;background:#08111f;color:#eaf1fb;overflow:auto;opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .3s ease,transform .3s ease,visibility .3s}
 .pnl-presentation.open{opacity:1;visibility:visible;transform:translateY(0)}
 body.pnl-open{overflow:hidden}
 .pnl-shell{min-height:100vh;background:radial-gradient(ellipse at 90% 0%,#16345a 0,transparent 35%),#08111f;padding:22px clamp(16px,3vw,42px) 30px}
@@ -431,6 +436,40 @@ body.pnl-open{overflow:hidden}
 @keyframes pnlRise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}@keyframes pnlGrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}@keyframes pnlBar{from{transform:scaleY(0);opacity:.25}to{transform:scaleY(1);opacity:1}}
 @media(max-width:900px){.pnl-hero,.pnl-grid,.pnl-case-note{grid-template-columns:1fr}.pnl-kpis{grid-template-columns:1fr}.pnl-expense-tiles{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){.pnl-shell{padding:13px}.pnl-topbar{align-items:flex-start;flex-direction:column}.pnl-actions{width:100%}.pnl-filterbox{padding:13px}.pnl-panel{padding:13px}.pnl-bars{height:175px}.pnl-expense-tiles{grid-template-columns:1fr 1fr}.pnl-footer{flex-direction:column}}
 @media(prefers-reduced-motion:reduce){.pnl-presentation *{animation-duration:.01ms!important;transition:none!important}}
+
+
+/* P&L interactions: visible hover feedback and theme-aware surfaces */
+.pnl-presentation section{padding:0;}
+.pnl-bar,.pnl-minibar{cursor:crosshair;transition:filter .18s ease,opacity .18s ease,transform .18s ease;}
+.pnl-bar:hover,.pnl-minibar:hover{filter:brightness(1.35) drop-shadow(0 0 5px #63aaffaa);transform:scaleX(1.12);}
+.pnl-group:hover,.pnl-col:hover{opacity:1!important;transform:translateY(-2px) scale(1.025)!important;}
+.pnl-month,.pnl-col small{transition:color .18s ease,font-weight .18s ease;}
+.pnl-group.current-month .pnl-month,.pnl-col.current-month small{color:#ffd27a;font-weight:900;text-decoration:underline;text-underline-offset:4px;}
+.pnl-group.current-month .pnl-pair,.pnl-col.current-month .pnl-minibar{filter:drop-shadow(0 0 5px #f2c36e66);}
+.pnl-bar:focus-visible,.pnl-minibar:focus-visible{outline:2px solid #ffd27a;outline-offset:2px;}
+/* In light portfolio mode, the P&L view switches to a light palette too. */
+[data-theme="light"] .pnl-presentation{color-scheme:light;background:#edf3fa;color:#162438;}
+[data-theme="dark"] .pnl-presentation{color-scheme:dark;background:#08111f;color:#eaf1fb;}
+[data-theme="light"] .pnl-shell{background:radial-gradient(ellipse at 90% 0%,#d6e8ff 0,transparent 38%),#edf3fa;}
+[data-theme="light"] .pnl-glass{background:linear-gradient(145deg,#ffffffed,#f7faffed);border-color:#d7e1ee;box-shadow:0 16px 40px #193a5c12;}
+[data-theme="light"] .pnl-title h2,[data-theme="light"] .pnl-panel h3,[data-theme="light"] .pnl-expense-tile strong,[data-theme="light"] .pnl-case-note h3{color:#162438;}
+[data-theme="light"] .pnl-title p,[data-theme="light"] .pnl-panel p,[data-theme="light"] .pnl-sub,[data-theme="light"] .pnl-chart-foot,[data-theme="light"] .pnl-month,[data-theme="light"] .pnl-col small,[data-theme="light"] .pnl-footer,[data-theme="light"] .pnl-expense-tile small,[data-theme="light"] .pnl-case-note p{color:#5d6f85;}
+[data-theme="light"] .pnl-metric{color:#162438;}
+[data-theme="light"] .pnl-kpi-head{color:#5d6f85;}
+[data-theme="light"] .pnl-kpi-head span,[data-theme="light"] .pnl-tag,[data-theme="light"] .pnl-chips span{background:#e7f0fb;border-color:#d0dfef;color:#31516f;}
+[data-theme="light"] .pnl-filterbox select{background:#fff;color:#162438;border-color:#cbd8e7;}
+[data-theme="light"] .pnl-btn{background:#fff;color:#243a54;border-color:#cbd8e7;}
+[data-theme="light"] .pnl-btn:hover,[data-theme="light"] .pnl-btn.active{background:#dcecff;color:#174b85;border-color:#80b6f0;}
+[data-theme="light"] .pnl-comment-banner{background:#e1edfb;border-color:#d0dfef;}
+[data-theme="light"] .pnl-comment-banner span{color:#315d8b;}
+[data-theme="light"] .pnl-comment-body{background:#f7faff;border-color:#d0dfef;}
+[data-theme="light"] .pnl-comment-placeholder{border-color:#c4d4e6;color:#536b84;}
+[data-theme="light"] .pnl-comment-placeholder strong{color:#1b2d43;}
+[data-theme="light"] .pnl-info,[data-theme="light"] .pnl-expense-icon{background:#dcecff;color:#245f9e;}
+[data-theme="light"] .pnl-case-note{background:#f7faff;border-color:#d7e1ee;}
+[data-theme="light"] .pnl-bars,[data-theme="light"] .pnl-mini{border-bottom-color:#cbd8e7;background:repeating-linear-gradient(to top,transparent 0,transparent 43px,#1b38570b 44px);}
+[data-theme="light"] .pnl-legend{color:#5d6f85;}
+[data-theme="light"] .pnl-expense-icon{background:#e2efff;}
 
 </style>
 </head>
@@ -485,6 +524,8 @@ body.pnl-open{overflow:hidden}
         <div class="hero-visual reveal">
             <div class="orbit">
                 <div class="core">📊</div>
+                <div class="orbit-card oc6">Power Query</div>
+                <div class="orbit-card oc5">Adv.Excel</div>
                 <div class="orbit-card oc1">Power BI</div>
                 <div class="orbit-card oc2">SQL</div>
                 <div class="orbit-card oc3">Python</div>
@@ -718,12 +759,14 @@ body.pnl-open{overflow:hidden}
             <h3 style="font-family:'Space Grotesk';font-size:1.5rem">Experience</h3>
             <div class="experience" style="margin-top:18px">
                 <div class="exp">
-                    <div class="exp-top"><h3>FP&A / MIS Analyst</h3><small>Present</small></div>
+                    <div class="exp-top"><h3>Finance Planning Analyst / MIS Executive</h3><small>Present</small></div>
                     <p>EC-Council — Finance, reporting, analysis and process-focused work.</p>
+                    <p>May'2026 - Present</p>
                 </div>
                 <div class="exp">
                     <div class="exp-top"><h3>Data Analyst / MIS Executive</h3><small>Previous</small></div>
                     <p>KFin Technologies — MIS reporting, data analysis, dashboards and business reporting.</p>
+                    <p>Aug'2024 - Apr'2026</p>
                 </div>
             </div>
         </div>
@@ -801,19 +844,22 @@ body.pnl-open{overflow:hidden}
 
 <script>
 /* THEME */
+function applyTheme(theme){
+    document.body.setAttribute('data-theme', theme);
+    localStorage.setItem('portfolioTheme', theme);
+    const nextIcon = theme === 'dark' ? '☀️' : '🌙';
+    document.querySelectorAll('.theme-toggle, #pnlThemeToggle').forEach(btn => {
+        btn.textContent = nextIcon;
+        btn.setAttribute('aria-label', theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
+        btn.setAttribute('title', theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
+    });
+}
 function toggleTheme(){
-    const body=document.body;
-    const btn=document.querySelector('.theme-toggle');
-    const dark=body.getAttribute('data-theme')==='dark';
-    body.setAttribute('data-theme',dark?'light':'dark');
-    btn.textContent=dark?'🌙':'☀️';
-    localStorage.setItem('portfolioTheme',dark?'light':'dark');
+    const currentTheme = document.body.getAttribute('data-theme') || 'light';
+    applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
 }
 const savedTheme=localStorage.getItem('portfolioTheme');
-if(savedTheme){
-    document.body.setAttribute('data-theme',savedTheme);
-    document.querySelector('.theme-toggle').textContent=savedTheme==='dark'?'☀️':'🌙';
-}
+applyTheme(savedTheme === 'dark' ? 'dark' : 'light');
 
 /* MOBILE MENU */
 function toggleMenu(){document.getElementById('navbar').classList.toggle('open')}
@@ -973,11 +1019,11 @@ document.getElementById('currentYear').textContent=new Date().getFullYear();
   <div class="pnl-shell">
     <header class="pnl-topbar">
       <div class="pnl-brand"><div class="pnl-brand-mark">P&amp;L</div><div>Financial performance<small>Portfolio case study · Finance analytics</small></div></div>
-      <div class="pnl-actions"><button class="pnl-btn active" id="pnlYearly">Yearly view</button><button class="pnl-btn" id="pnlMonthly">Monthly view</button><button class="pnl-btn" id="pnlReplay">↻ Replay motion</button><button class="pnl-btn pnl-close" onclick="closePnLPresentation()" aria-label="Close presentation">✕</button></div>
+      <div class="pnl-actions"><button class="pnl-btn active" id="pnlYearly">Yearly view</button><button class="pnl-btn" id="pnlMonthly">Monthly view</button><button class="pnl-btn" id="pnlReplay">↻ Replay motion</button><button class="pnl-btn" id="pnlThemeToggle" onclick="toggleTheme()" aria-label="Switch theme" title="Switch theme">🌙</button><button class="pnl-btn pnl-close" onclick="closePnLPresentation()" aria-label="Close presentation">✕</button></div>
     </header>
     <main class="pnl-content">
       <section class="pnl-hero">
-        <div class="pnl-glass pnl-title"><div class="pnl-eyebrow">Management reporting · FP&amp;A</div><h2>P&amp;L Performance &amp;<br>Departmental Cost Analysis</h2><p>A modern overview of financial performance, expense drivers and departmental cost trends — built to move from executive summary into detailed analysis.</p><span class="pnl-private">Privacy-safe portfolio view · financial values concealed</span></div>
+        <div class="pnl-glass pnl-title"><div class="pnl-eyebrow">Management reporting · FP&amp;A</div><h2>P&amp;L Performance &amp;<br>Departmental Cost Analysis</h2><p>A modern overview of financial performance, expense drivers and departmental cost trends — built to move from executive summary into detailed analysis.</p><span class="pnl-private">Portfolio demo · illustrative financial values</span></div>
         <div class="pnl-glass pnl-filterbox">
           <div class="pnl-field"><label for="pnlDept">Department</label><select id="pnlDept"><option>All departments</option><option>Selected department</option><option>IT</option><option>Marketing</option><option>Other</option><option>Salaries</option></select></div>
           <div class="pnl-field"><label for="pnlPeriod">Period</label><select id="pnlPeriod"><option>YTD · selected period</option><option>Current month</option><option>Previous month</option><option>Full year</option></select></div>
@@ -986,38 +1032,120 @@ document.getElementById('currentYear').textContent=new Date().getFullYear();
         </div>
       </section>
       <section class="pnl-kpis">
-        <article class="pnl-glass pnl-kpi"><div class="pnl-kpi-head">Revenue <span>Variance · —</span></div><div class="pnl-metric">••••••</div><div class="pnl-meter"><span style="--w:68%;--c:#55a8ff"></span></div><div class="pnl-sub"><span>Budget: hidden</span><span>Actual vs budget</span></div></article>
-        <article class="pnl-glass pnl-kpi"><div class="pnl-kpi-head">Gross profit <span>Margin · —</span></div><div class="pnl-metric">••••••</div><div class="pnl-meter"><span style="--w:82%;--c:#4bc99a"></span></div><div class="pnl-sub"><span>Budget: hidden</span><span>Gross margin</span></div></article>
-        <article class="pnl-glass pnl-kpi"><div class="pnl-kpi-head">EBITDA <span>Variance · —</span></div><div class="pnl-metric">••••••</div><div class="pnl-meter"><span style="--w:43%;--c:#edbb5d"></span></div><div class="pnl-sub"><span>Budget: hidden</span><span>EBITDA margin</span></div></article>
+        <article class="pnl-glass pnl-kpi"><div class="pnl-kpi-head">Revenue <span id="pnlRevenueVariance">vs budget</span></div><div class="pnl-metric" id="pnlRevenueValue">₹ 0.0 L</div><div class="pnl-meter"><span id="pnlRevenueMeter" style="--w:68%;--c:#55a8ff"></span></div><div class="pnl-sub"><span id="pnlRevenueBudget">Budget: ₹ 0.0 L</span><span id="pnlRevenueMargin">Actual vs budget</span></div></article>
+        <article class="pnl-glass pnl-kpi"><div class="pnl-kpi-head">Gross profit <span id="pnlGrossMargin">Margin · 0%</span></div><div class="pnl-metric" id="pnlGrossValue">₹ 0.0 L</div><div class="pnl-meter"><span id="pnlGrossMeter" style="--w:82%;--c:#4bc99a"></span></div><div class="pnl-sub"><span id="pnlGrossBudget">Budget: ₹ 0.0 L</span><span>Revenue − direct costs</span></div></article>
+        <article class="pnl-glass pnl-kpi"><div class="pnl-kpi-head">EBITDA <span id="pnlEbitdaVariance">vs budget</span></div><div class="pnl-metric" id="pnlEbitdaValue">₹ 0.0 L</div><div class="pnl-meter"><span id="pnlEbitdaMeter" style="--w:43%;--c:#edbb5d"></span></div><div class="pnl-sub"><span id="pnlEbitdaBudget">Budget: ₹ 0.0 L</span><span id="pnlEbitdaMargin">EBITDA margin</span></div></article>
       </section>
       <section class="pnl-grid">
-        <article class="pnl-glass pnl-panel"><div class="pnl-panel-head"><div><h3>Financial overview</h3><p id="pnlChartDesc">Prior year vs current year · illustrative visual comparison</p></div><span class="pnl-tag" id="pnlPeriodLabel">YTD VIEW</span></div><div class="pnl-legend"><span><i class="pnl-dot" style="background:#51647d"></i>Prior year</span><span><i class="pnl-dot" style="background:#55a8ff"></i>Current year</span><span><i class="pnl-dot" style="background:#4bc99a"></i>Favorable variance</span></div><div class="pnl-bars" id="pnlOverviewBars"></div><div class="pnl-chart-foot"><span>Monthly trend · illustrative shapes only</span><span>No source figures displayed</span></div></article>
+        <article class="pnl-glass pnl-panel"><div class="pnl-panel-head"><div><h3>Financial overview</h3><p id="pnlChartDesc">Prior year vs current year · illustrative visual comparison</p></div><span class="pnl-tag" id="pnlPeriodLabel">YTD VIEW</span></div><div class="pnl-legend"><span><i class="pnl-dot" style="background:#51647d"></i>Prior year</span><span><i class="pnl-dot" style="background:#55a8ff"></i>Current year</span><span><i class="pnl-dot" style="background:#4bc99a"></i>Favorable variance</span></div><div class="pnl-bars" id="pnlOverviewBars"></div><div class="pnl-chart-foot"><span id="pnlTrendFoot">Monthly trend · illustrative data</span><span>Illustrative values only</span></div></article>
         <div class="pnl-side">
-          <article class="pnl-glass pnl-panel"><div class="pnl-panel-head"><div><h3>Expense composition</h3><p>Category-level cost analysis</p></div><span class="pnl-tag">COST MIX</span></div><div class="pnl-mini" id="pnlExpenseBars"></div><div class="pnl-chart-foot"><span>Category comparison</span><span>Values hidden</span></div></article>
-          <article class="pnl-glass pnl-panel"><div class="pnl-panel-head"><div><h3>EBITDA movement</h3><p>Profitability across selected periods</p></div><span class="pnl-tag">TREND</span></div><div class="pnl-mini" id="pnlEbitdaBars"></div><div class="pnl-chart-foot"><span>Period movement</span><span>Values hidden</span></div></article>
+          <article class="pnl-glass pnl-panel"><div class="pnl-panel-head"><div><h3>Expense composition</h3><p>Category-level cost analysis</p></div><span class="pnl-tag">COST MIX</span></div><div class="pnl-mini" id="pnlExpenseBars"></div><div class="pnl-chart-foot"><span id="pnlExpenseFoot">Expense composition</span><span>Illustrative values</span></div></article>
+          <article class="pnl-glass pnl-panel"><div class="pnl-panel-head"><div><h3>EBITDA movement</h3><p>Profitability across selected periods</p></div><span class="pnl-tag">TREND</span></div><div class="pnl-mini" id="pnlEbitdaBars"></div><div class="pnl-chart-foot"><span id="pnlEbitdaFoot">EBITDA by month</span><span>Illustrative values</span></div></article>
         </div>
       </section>
-      <section class="pnl-comment"><div class="pnl-comment-banner"><strong>Management highlights &amp; commentary</strong><span id="pnlCommentTag">SELECTED DEPARTMENTS ONLY</span></div><div class="pnl-comment-body"><div class="pnl-comment-placeholder"><div class="pnl-info">i</div><div><strong>Commentary appears only for departments with an approved note.</strong>For other departments, this section remains intentionally blank. Month-wise and category-wise commentary can be connected when the sanitized data is supplied.</div></div></div></section>
+      <section class="pnl-comment"><div class="pnl-comment-banner"><strong>Management highlights &amp; commentary</strong><span id="pnlCommentTag">SELECTED DEPARTMENTS ONLY</span></div><div class="pnl-comment-body" id="pnlCommentBody"><div class="pnl-comment-placeholder"><div class="pnl-info">i</div><div><strong>Illustrative management commentary</strong>Select a department to view a sample note. This is demo commentary, not an actual company assessment.</div></div></div></section>
       <section class="pnl-expense-tiles"><article class="pnl-glass pnl-expense-tile"><div class="pnl-expense-icon">▤</div><div><strong>Salaries</strong><small>People-related expenses</small></div></article><article class="pnl-glass pnl-expense-tile"><div class="pnl-expense-icon">⌘</div><div><strong>IT expenses</strong><small>Tools, software &amp; services</small></div></article><article class="pnl-glass pnl-expense-tile"><div class="pnl-expense-icon">◈</div><div><strong>Marketing</strong><small>Campaigns &amp; acquisition</small></div></article><article class="pnl-glass pnl-expense-tile"><div class="pnl-expense-icon">▦</div><div><strong>Other expenses</strong><small>Operational cost categories</small></div></article></section>
-      <section class="pnl-case-note"><div><h3>Project overview</h3><p>A management reporting concept linking executive KPIs with period movement and departmental expense detail. This portfolio edition intentionally conceals financial values and does not include real vendor figures.</p></div><div class="pnl-chips"><span>Power BI &amp; DAX</span><span>Budget vs Actual</span><span>Prior Year vs Current Year</span><span>Departmental costs</span><span>Category analysis</span><span>Selective commentary</span><span>Interactive filters</span></div></section>
-      <footer class="pnl-footer"><span>Illustrative portfolio presentation · financial values hidden</span><span>Press Esc or ✕ to return to the portfolio</span></footer>
+      <section class="pnl-case-note"><div><h3>Project overview</h3><p>A management reporting concept linking executive KPIs with period movement and departmental expense detail. All figures are dummy values created for demonstration. The calculations are internally consistent, but the figures do not represent actual company results or vendor spend.</p></div><div class="pnl-chips"><span>Power BI &amp; DAX</span><span>Budget vs Actual</span><span>Prior Year vs Current Year</span><span>Departmental costs</span><span>Category analysis</span><span>Selective commentary</span><span>Interactive filters</span></div></section>
+      <footer class="pnl-footer"><span>Illustrative portfolio presentation · all financial figures are dummy values; calculations are demonstration-only</span><span>Press Esc or ✕ to return to the portfolio</span></footer>
     </main>
   </div>
 </div>
 <script>
 (function(){
  const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
- const prev=[48,63,55,72,46,60,76,58,68,49,79,64],cur=[66,52,74,58,62,78,51,71,57,76,61,69];
- function drawMain(){const root=document.getElementById('pnlOverviewBars');if(!root)return;root.innerHTML='';months.forEach((m,i)=>{const g=document.createElement('div');g.className='pnl-group';g.innerHTML=`<div class="pnl-pair"><div class="pnl-bar pnl-py" style="height:${prev[i]}%;animation-delay:${i*.03}s"></div><div class="pnl-bar pnl-cy" style="height:${cur[i]}%;animation-delay:${i*.03+.06}s"></div></div><div class="pnl-month">${m}</div>`;root.appendChild(g)})}
- function drawMini(id,vals){const root=document.getElementById(id);if(!root)return;root.innerHTML='';vals.forEach((v,i)=>{const c=document.createElement('div');c.className='pnl-col';c.innerHTML=`<div class="pnl-minibar" style="height:${v}%;animation-delay:${i*.04}s"></div><small>${months[i]}</small>`;root.appendChild(c)})}
- window.openPnLPresentation=function(){const modal=document.getElementById('pnlPresentation');modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.classList.add('pnl-open');drawMain();drawMini('pnlExpenseBars',[43,67,52,79,58,70,47,62,73,54,65,49]);drawMini('pnlEbitdaBars',[60,42,74,53,34,66,48,72,57,39,68,51]);};
- window.closePnLPresentation=function(){const modal=document.getElementById('pnlPresentation');modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.classList.remove('pnl-open');};
- document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementById('pnlPresentation').classList.contains('open'))window.closePnLPresentation()});
- document.getElementById('pnlReplay').addEventListener('click',()=>{document.querySelectorAll('#pnlPresentation .pnl-bar,#pnlPresentation .pnl-minibar,#pnlPresentation .pnl-meter span,#pnlPresentation .pnl-kpi,#pnlPresentation .pnl-panel').forEach(el=>{el.style.animation='none';void el.offsetWidth;el.style.animation=''});});
- document.getElementById('pnlYearly').addEventListener('click',()=>{document.getElementById('pnlYearly').classList.add('active');document.getElementById('pnlMonthly').classList.remove('active');document.getElementById('pnlPeriodLabel').textContent='YTD VIEW';document.querySelectorAll('#pnlOverviewBars .pnl-group').forEach(g=>{g.style.opacity='1';g.style.transform=''})});
- document.getElementById('pnlMonthly').addEventListener('click',()=>{document.getElementById('pnlMonthly').classList.add('active');document.getElementById('pnlYearly').classList.remove('active');document.getElementById('pnlPeriodLabel').textContent='MONTH VIEW';document.querySelectorAll('#pnlOverviewBars .pnl-group').forEach((g,i)=>{g.style.opacity=i===8?'1':'.22';g.style.transform=i===8?'scale(1.08)':'scale(.96)'})});
- document.getElementById('pnlDept').addEventListener('change',e=>{document.getElementById('pnlCommentTag').textContent=e.target.value==='All departments'?'SELECTED DEPARTMENTS ONLY':'COMMENTARY RULE · SELECTED DEPARTMENTS'});
- document.getElementById('pnlScope').addEventListener('change',e=>{document.getElementById('pnlChartDesc').textContent=e.target.value==='Vendor / tool detail'?'Vendor and tool-level cost detail · values concealed':e.target.value==='Category view'?'Expense categories and monthly movement · values concealed':'Prior year vs current year · illustrative visual comparison'});
+ const fullMonths=['January','February','March','April','May','June','July','August','September','October','November','December'];
+ const departments=['IT','Marketing','Other','Salaries'];
+ // Synthetic demonstration data only. All figures are in ₹ lakh.
+ const data=months.map((month,i)=>{
+   const revenueBudget=112+(i*4.7)+(i%3)*5;
+   const revenueActual=revenueBudget*(0.94+((i*7)%13)/100);
+   const directBudget=revenueBudget*.39;
+   const directActual=directBudget*(.96+((i*5)%11)/100);
+   const expBudget={IT:13+(i%4)*.8,Marketing:17+(i%3)*1.1,Other:8+(i%5)*.45,Salaries:31+(i%4)*1.3};
+   const expActual={IT:expBudget.IT*(.91+((i*3)%14)/100),Marketing:expBudget.Marketing*(.92+((i*4)%12)/100),Other:expBudget.Other*(.9+((i*2)%15)/100),Salaries:expBudget.Salaries*(.97+((i*3)%7)/100)};
+   return {month,index:i,revenueBudget,revenueActual,directBudget,directActual,expBudget,expActual};
+ });
+ const $=id=>document.getElementById(id);
+ const money=v=>'₹ '+(v<0?'−':'')+Math.abs(v).toLocaleString('en-IN',{minimumFractionDigits:1,maximumFractionDigits:1})+' L';
+ const pct=v=>(v>=0?'+':'')+v.toFixed(1)+'%';
+ const currentMonth=new Date().getMonth();
+ let monthlyMode=false;
+ function selectedIndices(){
+   const p=$('pnlPeriod').value;
+   if(p==='Current month') return [currentMonth];
+   if(p==='Previous month') return [(currentMonth+11)%12];
+   if(p==='Full year') return months.map((_,i)=>i);
+   return months.map((_,i)=>i).filter(i=>i<=currentMonth);
+ }
+ function departmentCosts(row){
+   const d=$('pnlDept').value;
+   const names=d==='All departments'?departments:(departments.includes(d)?[d]:departments);
+   return names.reduce((a,n)=>({budget:a.budget+row.expBudget[n],actual:a.actual+row.expActual[n]}),{budget:0,actual:0});
+ }
+ function aggregate(rows){
+   return rows.reduce((a,r)=>{const e=departmentCosts(r);a.revB+=r.revenueBudget;a.revA+=r.revenueActual;a.directB+=r.directBudget;a.directA+=r.directActual;a.expB+=e.budget;a.expA+=e.actual;return a;},{revB:0,revA:0,directB:0,directA:0,expB:0,expA:0});
+ }
+ function setMeter(id,value,max){$(id).style.setProperty('--w',Math.max(4,Math.min(100,(value/Math.max(max,1))*100))+'%');}
+ function tooltip(text){return ` title="${text.replace(/"/g,'&quot;')}" aria-label="${text.replace(/"/g,'&quot;')}"`}
+ function drawMain(rows){
+   const root=$('pnlOverviewBars');root.innerHTML='';
+   const comp=$('pnlComparison').value;
+   const dept=$('pnlDept').value;
+   const scope=$('pnlScope').value;
+   const points=rows.length?rows:data;
+   points.forEach((r)=>{
+     const costs=departmentCosts(r);
+     const grossA=r.revenueActual-r.directActual, grossB=r.revenueBudget-r.directBudget;
+     const ebitdaA=grossA-costs.actual, ebitdaB=grossB-costs.budget;
+     let a,b,labelA,labelB;
+     if(comp==='Current vs Budget'){a=r.revenueActual;b=r.revenueBudget;labelA='Actual revenue';labelB='Revenue budget';}
+     else if(comp==='Expense composition'){a=costs.actual;b=costs.budget;labelA='Actual expenses';labelB='Expense budget';}
+     else {a=ebitdaA;b=ebitdaB;labelA='Current-year EBITDA';labelB='Budget/prior-period benchmark';}
+     if(scope==='Category view'){a=costs.actual;b=costs.budget;labelA='Department expense actual';labelB='Department expense budget';}
+     if(scope==='Vendor / tool detail'){a=costs.actual*.44;b=costs.budget*.46;labelA='Illustrative vendor/tool actual';labelB='Illustrative vendor/tool budget';}
+     const max=Math.max(a,b,1),ha=Math.max(3,a/max*90),hb=Math.max(3,b/max*90);
+     const g=document.createElement('div');g.className='pnl-group'+(r.index===currentMonth?' current-month':'');
+     g.innerHTML=`<div class="pnl-pair"><div class="pnl-bar pnl-py" style="height:${hb}%;animation-delay:${r.index*.02}s"${tooltip(`${r.month} · ${labelB}: ${money(b)}`)}></div><div class="pnl-bar pnl-cy" style="height:${ha}%;animation-delay:${r.index*.02+.05}s"${tooltip(`${r.month} · ${labelA}: ${money(a)}`)}></div></div><div class="pnl-month">${r.month}</div>`;
+     root.appendChild(g);
+   });
+   $('pnlChartDesc').textContent=scope==='Vendor / tool detail'?'Illustrative vendor/tool-level cost breakdown':scope==='Category view'?'Departmental expense movement · dummy values':comp==='Current vs Budget'?'Revenue: actual vs budget · dummy values':comp==='Expense composition'?'Expense composition: actual vs budget · dummy values':'EBITDA performance · illustrative comparison';
+   $('pnlPeriodLabel').textContent=$('pnlPeriod').value.toUpperCase();
+   $('pnlTrendFoot').textContent=`${dept} · ${points.length} month${points.length===1?'':'s'} in view`;
+ }
+ function drawMini(id,rows,metric){
+   const root=$(id);root.innerHTML='';
+   const values=rows.map(r=>{const e=departmentCosts(r);const gross=r.revenueActual-r.directActual;return metric==='expense'?e.actual: gross-e.actual;});
+   const max=Math.max(...values.map(Math.abs),1);
+   rows.forEach((r,i)=>{const v=values[i],height=Math.max(4,Math.abs(v)/max*88);const c=document.createElement('div');c.className='pnl-col'+(r.index===currentMonth?' current-month':'');c.innerHTML=`<div class="pnl-minibar" style="height:${height}%"${tooltip(`${r.month} · ${metric==='expense'?'Expenses':'EBITDA'}: ${money(v)}`)}></div><small>${r.month}</small>`;root.appendChild(c);});
+ }
+ function render(){
+   const indices=selectedIndices();const rows=indices.map(i=>data[i]);const a=aggregate(rows);
+   const grossA=a.revA-a.directA,grossB=a.revB-a.directB;
+   const ebitdaA=grossA-a.expA,ebitdaB=grossB-a.expB;
+   const revVar=a.revA-a.revB,grossVar=grossA-grossB,ebitdaVar=ebitdaA-ebitdaB;
+   $('pnlRevenueValue').textContent=money(a.revA);$('pnlRevenueBudget').textContent='Budget: '+money(a.revB);$('pnlRevenueVariance').textContent=(revVar>=0?'+':'')+money(revVar);$('pnlRevenueMargin').textContent='Variance '+pct(a.revB?revVar/a.revB*100:0);setMeter('pnlRevenueMeter',a.revA,a.revB);
+   $('pnlGrossValue').textContent=money(grossA);$('pnlGrossBudget').textContent='Budget: '+money(grossB);$('pnlGrossMargin').textContent='Margin · '+pct(a.revA?grossA/a.revA*100:0);setMeter('pnlGrossMeter',grossA,Math.max(grossB,a.revA));
+   $('pnlEbitdaValue').textContent=money(ebitdaA);$('pnlEbitdaBudget').textContent='Budget: '+money(ebitdaB);$('pnlEbitdaVariance').textContent=(ebitdaVar>=0?'+':'')+money(ebitdaVar);$('pnlEbitdaMargin').textContent='Margin '+pct(a.revA?ebitdaA/a.revA*100:0);setMeter('pnlEbitdaMeter',Math.max(0,ebitdaA),Math.max(ebitdaB,a.revA*.25));
+   drawMain(rows);drawMini('pnlExpenseBars',rows,'expense');drawMini('pnlEbitdaBars',rows,'ebitda');
+   $('pnlExpenseFoot').textContent=$('pnlDept').value+' · actual expenses';$('pnlEbitdaFoot').textContent='EBITDA by selected month';
+   const dept=$('pnlDept').value;
+   $('pnlCommentTag').textContent=dept==='All departments'?'ILLUSTRATIVE SUMMARY':'ILLUSTRATIVE · '+dept.toUpperCase();
+   const expenseVar=a.expB-a.expA;
+   $('pnlCommentBody').innerHTML=`<div class="pnl-comment-placeholder"><div class="pnl-info">i</div><div><strong>Illustrative management commentary — ${dept}</strong>Revenue is ${revVar>=0?'above':'below'} the demo budget by ${money(Math.abs(revVar))}. Selected departmental expenses are ${expenseVar>=0?'under':'over'} budget by ${money(Math.abs(expenseVar))}. EBITDA is ${ebitdaVar>=0?'ahead of':'below'} the demo budget by ${money(Math.abs(ebitdaVar))}. These are generated sample values, not real company results.</div></div>`;
+   document.querySelectorAll('#pnlPresentation .pnl-group,#pnlPresentation .pnl-col').forEach(el=>el.classList.toggle('current-month',el.querySelector('.pnl-month,small')?.textContent===months[currentMonth]));
+   document.querySelectorAll('#pnlPresentation .pnl-bar,#pnlPresentation .pnl-minibar').forEach(el=>{el.style.animation='none';void el.offsetWidth;el.style.animation=''});
+ }
+ window.openPnLPresentation=function(){const modal=$('pnlPresentation');modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.classList.add('pnl-open');render();};
+ window.closePnLPresentation=function(){const modal=$('pnlPresentation');modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.classList.remove('pnl-open');};
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('pnlPresentation').classList.contains('open'))window.closePnLPresentation()});
+ ['pnlDept','pnlPeriod','pnlComparison','pnlScope'].forEach(id=>$(id).addEventListener('change',render));
+ $('pnlReplay').addEventListener('click',()=>{document.querySelectorAll('#pnlPresentation .pnl-bar,#pnlPresentation .pnl-minibar,#pnlPresentation .pnl-meter span,#pnlPresentation .pnl-kpi,#pnlPresentation .pnl-panel').forEach(el=>{el.style.animation='none';void el.offsetWidth;el.style.animation=''});});
+ $('pnlYearly').addEventListener('click',()=>{monthlyMode=false;$('pnlYearly').classList.add('active');$('pnlMonthly').classList.remove('active');$('pnlPeriodLabel').textContent='YEARLY VIEW';render();});
+ $('pnlMonthly').addEventListener('click',()=>{monthlyMode=true;$('pnlMonthly').classList.add('active');$('pnlYearly').classList.remove('active');$('pnlPeriod').value='Current month';render();});
+ // Seed month labels from the real current date; no September-specific logic.
+ $('pnlPeriod').options[0].textContent='YTD · through '+fullMonths[currentMonth];
+ $('pnlPeriod').options[1].textContent='Current month · '+fullMonths[currentMonth];
+ $('pnlPeriod').options[2].textContent='Previous month · '+fullMonths[(currentMonth+11)%12];
 })();
 </script>
 
