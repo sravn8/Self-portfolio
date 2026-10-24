@@ -526,6 +526,42 @@ body.pnl-open{overflow:hidden}
 @media(max-width:760px){.dashboard-modal{max-height:95vh}.dashboard-workspace{padding:17px}.dashboard-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.dashboard-charts,.dashboard-overview-grid{grid-template-columns:1fr}.dashboard-panel.wide{grid-column:auto}.dashboard-chart{height:165px}}
 @media(max-width:440px){.dashboard-kpi{padding:11px}.dashboard-kpi strong{font-size:1.15rem}.dashboard-chart{gap:4px}.dashboard-bar-label{font-size:.56rem}}
 
+
+/* AUTOMATION DEMO WORKSPACE */
+.automation-demo{color:var(--text);padding:8px 2px 4px}
+.automation-demo-head{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;flex-wrap:wrap;margin-bottom:22px}
+.automation-demo-eyebrow{font-size:.68rem;text-transform:uppercase;letter-spacing:.13em;font-weight:900;color:var(--primary);margin-bottom:7px}
+.automation-demo-head h3{font-family:"Space Grotesk";font-size:clamp(1.45rem,3vw,2rem);line-height:1.2;margin-bottom:8px}
+.automation-demo-head p{color:var(--muted);max-width:670px;font-size:.9rem}
+.automation-demo-status{display:inline-flex;align-items:center;gap:8px;padding:8px 11px;border:1px solid var(--border);border-radius:999px;background:var(--surface);font-size:.72rem;font-weight:800;white-space:nowrap}
+.automation-demo-status i{width:7px;height:7px;border-radius:50%;background:var(--success);display:inline-block;box-shadow:0 0 0 4px color-mix(in srgb,var(--success) 15%,transparent)}
+.automation-demo-tags{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0 20px}
+.automation-demo-layout{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(250px,.85fr);gap:16px}
+.automation-stage-panel,.automation-detail-panel{border:1px solid var(--border);background:var(--surface);border-radius:18px;padding:18px;min-width:0}
+.automation-panel-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:15px}
+.automation-panel-top strong{font-size:.8rem}.automation-panel-top span{font-size:.68rem;color:var(--muted)}
+.automation-stage-list{display:grid;gap:9px}
+.automation-stage{width:100%;display:grid;grid-template-columns:35px minmax(0,1fr) auto;gap:11px;align-items:center;text-align:left;padding:12px;border:1px solid var(--border);border-radius:13px;background:var(--surface-solid);color:var(--text);cursor:pointer;transition:border-color .2s,transform .2s,background .2s}
+.automation-stage:hover{transform:translateX(2px);border-color:var(--primary)}
+.automation-stage.active{border-color:var(--primary);background:color-mix(in srgb,var(--primary) 8%,var(--surface-solid));box-shadow:inset 3px 0 0 var(--primary)}
+.automation-stage-num{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:var(--bg-soft);font-size:.75rem;font-weight:900;color:var(--primary)}
+.automation-stage.active .automation-stage-num{background:var(--primary);color:white}
+.automation-stage-label{font-size:.79rem;font-weight:800;line-height:1.3}.automation-stage-sub{font-size:.68rem;color:var(--muted);margin-top:3px}
+.automation-stage-check{font-size:.72rem;color:var(--success);font-weight:900}
+.automation-visual{border:1px solid var(--border);border-radius:15px;background:linear-gradient(145deg,var(--bg-soft),var(--surface-solid));padding:20px;min-height:200px;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+.automation-visual:after{content:"";position:absolute;width:170px;height:170px;border-radius:50%;right:-90px;top:-90px;background:var(--hero-glow);pointer-events:none}
+.automation-visual-icon{font-size:2rem;margin-bottom:12px;position:relative;z-index:1}
+.automation-visual h4{font-family:"Space Grotesk";font-size:1.1rem;margin-bottom:7px;position:relative;z-index:1}
+.automation-visual p{font-size:.79rem;color:var(--muted);position:relative;z-index:1}
+.automation-progress{height:5px;border-radius:999px;background:var(--bg-soft);overflow:hidden;margin-top:17px}.automation-progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--primary),var(--primary-2));border-radius:999px;transition:width .45s ease}
+.automation-detail-panel h4{font-family:"Space Grotesk";font-size:1rem;margin-bottom:9px}.automation-detail-panel>p{font-size:.81rem;color:var(--muted);margin-bottom:16px}
+.automation-detail-list{display:grid;gap:10px;list-style:none}.automation-detail-list li{display:flex;gap:9px;font-size:.77rem;align-items:flex-start}.automation-detail-list li:before{content:"✓";color:var(--success);font-weight:900}
+.automation-demo-controls{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}.automation-demo-btn{border:1px solid var(--border);border-radius:10px;padding:10px 14px;background:var(--surface-solid);color:var(--text);font-size:.77rem;font-weight:800;cursor:pointer;transition:.2s}.automation-demo-btn:hover{border-color:var(--primary);transform:translateY(-1px)}.automation-demo-btn.primary{background:var(--primary);color:#fff;border-color:var(--primary)}
+.automation-demo-note{font-size:.7rem;color:var(--muted);padding:12px 14px;border:1px dashed var(--border);border-radius:12px;margin-top:15px}
+.automation-demo-progress-label{display:flex;justify-content:space-between;gap:8px;font-size:.68rem;color:var(--muted);margin-top:10px}
+@media(max-width:680px){.automation-demo-layout{grid-template-columns:1fr}.automation-stage-panel,.automation-detail-panel{padding:14px}.automation-demo-head{margin-bottom:15px}}
+@media(prefers-reduced-motion:reduce){.automation-stage,.automation-progress-fill,.automation-demo-btn{transition:none!important}}
+
 </style>
 </head>
 
@@ -941,6 +977,11 @@ function dashboardRanks(labels,values){const max=Math.max(...values,1);return `<
 function openProject(key, card=null){
     const p=projects[key]; if(!p)return;
     const modal=document.getElementById('projectModal');
+    if(['sap','salesforce','forecast','powerquery'].includes(key)){
+      modal.querySelector('.modal-content').classList.remove('dashboard-modal');
+      renderAutomationDemo(key);
+      modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';return;
+    }
     if(!dashboardProjects.has(key)){
       modal.querySelector('.modal-content').classList.remove('dashboard-modal');
       const tags=p.tags.map(t=>`<span class="tag">${escHtml(t)}</span>`).join('');
@@ -963,6 +1004,66 @@ function openProject(key, card=null){
     renderDashboardTab('overview');
     modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden';
 }
+
+const automationDemos={
+ sap:{eyebrow:'Browser automation · invoice workflow',status:'Workflow walkthrough',intro:'A portfolio-safe walkthrough of the SAP invoice download and Salesforce upload flow. The ECPL entity follows the Reference Section path instead of Billing Document.',stages:[
+  {icon:'📋',title:'Read the Excel control file',sub:'Load invoice references',desc:'Start from the tracking sheet and identify the invoice number and entity for the current item.',checks:['Read the invoice reference from Excel','Capture the entity value','Keep the source row available for status tracking']},
+  {icon:'🔎',title:'Locate the invoice in SAP',sub:'Choose the correct search path',desc:'Search the SAP invoice using the relevant reference. If the entity is ECPL, use the Reference Section rather than Billing Document.',checks:['Open the invoice search area','Use the correct field for the entity','Handle the ECPL reference-section exception']},
+  {icon:'⬇️',title:'Download the invoice PDF',sub:'Retrieve the document',desc:'Once the matching invoice is located, download its PDF and keep the document associated with its control-file reference.',checks:['Confirm the invoice match','Download the PDF','Keep the file linked to the correct invoice']},
+  {icon:'☁️',title:'Upload to Salesforce',sub:'Attach the invoice document',desc:'Move the downloaded invoice into the intended Salesforce record, avoiding duplicate or mismatched attachments.',checks:['Open the matching Salesforce record','Upload the invoice PDF','Verify the document is attached']},
+  {icon:'✅',title:'Update tracking status',sub:'Close the loop',desc:'Record the processing outcome in the tracking workflow so exceptions and completed items can be reviewed.',checks:['Record success or an exception','Retain the invoice reference','Review unresolved items']}
+ ],note:'Illustrative UI walkthrough only. It does not connect to SAP or Salesforce, use credentials, or perform a live transaction.'},
+ salesforce:{eyebrow:'Salesforce · repeatable data handling',status:'Process concept',intro:'A general walkthrough of a repeatable Salesforce data-handling process. The exact objects and actions depend on the specific business workflow.',stages:[
+  {icon:'🧭',title:'Identify the work queue',sub:'Define records to process',desc:'Begin with the agreed record list or work queue, then define which records are in scope for the run.',checks:['Confirm the input list or queue','Identify the relevant record type','Exclude out-of-scope items']},
+  {icon:'🔐',title:'Open the authorized workspace',sub:'Use the approved access path',desc:'Access the appropriate Salesforce workspace using the organization-approved sign-in and permissions.',checks:['Use authorized access','Open the relevant Salesforce area','Avoid storing credentials in scripts']},
+  {icon:'🧾',title:'Review and validate records',sub:'Check key fields',desc:'Inspect the required fields and apply the agreed validation rules before any record update or reporting step.',checks:['Check required fields','Flag missing or inconsistent values','Keep exceptions visible']},
+  {icon:'⚙️',title:'Process the repeatable action',sub:'Reduce manual repetition',desc:'Apply the defined action consistently, such as updating approved fields or preparing a structured report. This demo does not assume a specific live action.',checks:['Apply only approved changes','Keep a record of processed items','Handle failures separately']},
+  {icon:'📊',title:'Review the output',sub:'Check results and exceptions',desc:'Review the resulting records or report and confirm the run is complete before sharing the output.',checks:['Check completion counts','Review exceptions','Prepare a concise result summary']}
+ ],note:'The current portfolio description does not specify the exact Salesforce task. This is a generic process illustration, not a claim of live system execution.'},
+ forecast:{eyebrow:'FP&A · time-series forecasting',status:'Forecast walkthrough',intro:'A visual walkthrough of the revenue and expense forecasting approach, using historical January–June values as inputs and illustrating a July–December forecast horizon.',stages:[
+  {icon:'📂',title:'Prepare historical actuals',sub:'January–June input period',desc:'Organize monthly revenue and expense history into a consistent time series before modeling.',checks:['Align monthly periods','Separate revenue and expense series','Check for missing or inconsistent values']},
+  {icon:'🧹',title:'Validate the time series',sub:'Make the data model-ready',desc:'Check the order of dates, data types and continuity so the forecasting method receives clean monthly inputs.',checks:['Sort months chronologically','Confirm numeric values','Review unusual movements']},
+  {icon:'📈',title:'Fit the forecasting model',sub:'Holt’s Exponential Smoothing',desc:'Apply Holt’s Exponential Smoothing through Python time-series tooling to model level and trend where appropriate.',checks:['Fit the model to historical values','Review trend behavior','Check model output for plausibility']},
+  {icon:'🗓️',title:'Generate July–December forecast',sub:'Extend the monthly horizon',desc:'Produce the next six monthly estimates for revenue and expenses from the fitted time-series model.',checks:['Forecast six future months','Keep revenue and expense outputs distinct','Label forecast periods clearly']},
+  {icon:'💼',title:'Review for planning',sub:'Translate estimates into insight',desc:'Compare the forecast with historical performance and use it as an input to budgeting and planning discussions.',checks:['Compare actuals and forecast','Investigate unusual changes','Document assumptions and limitations']}
+ ],note:'This is a conceptual walkthrough, not a calculation from your source workbook. Forecast values are intentionally not fabricated; connect the original dataset to show actual outputs.'},
+ powerquery:{eyebrow:'Excel · repeatable data preparation',status:'Transformation walkthrough',intro:'A reusable Power Query flow for importing recurring files, promoting headers, cleaning fields and producing a consistent reporting-ready table.',stages:[
+  {icon:'📁',title:'Connect to source files',sub:'Use the configured file path',desc:'Read the source location from the workbook control cell and import the recurring CSV or workbook data.',checks:['Read the configured path','Load the source file','Keep the import step repeatable']},
+  {icon:'🏷️',title:'Promote and type columns',sub:'Establish a reliable schema',desc:'Promote the first row to headers and assign suitable data types to the fields used downstream.',checks:['Promote column headers','Set appropriate data types','Check expected column names']},
+  {icon:'🧽',title:'Clean and standardize',sub:'Prepare consistent values',desc:'Apply repeatable transformations such as removing errors, trimming or splitting fields, and standardizing formats where needed.',checks:['Handle invalid rows deliberately','Standardize text and date fields','Apply only relevant transformations']},
+  {icon:'🧩',title:'Combine and shape data',sub:'Build a consistent output',desc:'Combine recurring files or tables with compatible structures, then keep the columns required for analysis.',checks:['Align column names and structure','Append or merge as required','Remove unnecessary columns']},
+  {icon:'🔄',title:'Refresh reporting inputs',sub:'Reuse the transformation steps',desc:'Refresh the query when new source files arrive, then validate the resulting table before using it in a PivotTable or dashboard.',checks:['Refresh the query','Check row counts and errors','Use the standardized output for reporting']}
+ ],note:'Stages are based on the recurring Power Query preparation patterns described for this portfolio. Exact transformation steps vary by source file.'}
+};
+function stopAutomationDemo(){if(window.automationDemoTimer){clearInterval(window.automationDemoTimer);window.automationDemoTimer=null;}window.automationDemoPlaying=false;}
+function renderAutomationDemo(key){
+ stopAutomationDemo();const p=projects[key],d=automationDemos[key];if(!p||!d)return;
+ window.activeAutomationKey=key;window.activeAutomationStage=0;
+ const tags=p.tags.map(t=>`<span class="tag">${escHtml(t)}</span>`).join('');
+ document.getElementById('modalBody').innerHTML=`<div class="automation-demo"><div class="automation-demo-head"><div><div class="automation-demo-eyebrow">${escHtml(d.eyebrow)}</div><h3>${p.icon} ${escHtml(p.title)}</h3><p>${escHtml(d.intro)}</p><div class="automation-demo-tags">${tags}</div></div><div class="automation-demo-status"><i></i>${escHtml(d.status)}</div></div><div class="automation-demo-layout"><section class="automation-stage-panel"><div class="automation-panel-top"><strong>Workflow stages</strong><span id="automationStageCount">Step 1 of ${d.stages.length}</span></div><div class="automation-stage-list" id="automationStageList"></div><div class="automation-demo-controls"><button class="automation-demo-btn primary" id="automationPlayBtn" onclick="toggleAutomationPlayback()">▶ Play walkthrough</button><button class="automation-demo-btn" onclick="replayAutomationDemo()">↺ Replay</button><button class="automation-demo-btn" onclick="stepAutomationDemo(-1)">← Previous</button><button class="automation-demo-btn" onclick="stepAutomationDemo(1)">Next →</button></div><div class="automation-demo-progress-label"><span>Walkthrough progress</span><span id="automationProgressText">20%</span></div><div class="automation-progress"><div class="automation-progress-fill" id="automationProgressFill"></div></div></section><aside class="automation-detail-panel"><div class="automation-panel-top"><strong>Stage preview</strong><span>Selected step</span></div><div class="automation-visual"><div class="automation-visual-icon" id="automationVisualIcon">${d.stages[0].icon}</div><h4 id="automationVisualTitle"></h4><p id="automationVisualDesc"></p></div><h4 style="margin-top:17px">What happens here</h4><p id="automationStageDetail"></p><ul class="automation-detail-list" id="automationChecklist"></ul></aside></div><div class="automation-demo-note"><strong>Transparency note:</strong> ${escHtml(d.note)}</div></div>`;
+ renderAutomationStage(0);
+}
+function renderAutomationStage(index){
+ const d=automationDemos[window.activeAutomationKey];if(!d)return;index=Math.max(0,Math.min(d.stages.length-1,index));window.activeAutomationStage=index;const stage=d.stages[index];
+ const list=document.getElementById('automationStageList');if(!list)return;
+ list.innerHTML=d.stages.map((s,i)=>`<button class="automation-stage ${i===index?'active':''}" onclick="selectAutomationStage(${i})" aria-current="${i===index?'step':'false'}"><span class="automation-stage-num">${String(i+1).padStart(2,'0')}</span><span><span class="automation-stage-label">${escHtml(s.title)}</span><span class="automation-stage-sub">${escHtml(s.sub)}</span></span><span class="automation-stage-check">${i<index?'✓':i===index?'●':''}</span></button>`).join('');
+ document.getElementById('automationStageCount').textContent=`Step ${index+1} of ${d.stages.length}`;
+ document.getElementById('automationVisualIcon').textContent=stage.icon;document.getElementById('automationVisualTitle').textContent=stage.title;document.getElementById('automationVisualDesc').textContent=stage.sub;document.getElementById('automationStageDetail').textContent=stage.desc;
+ document.getElementById('automationChecklist').innerHTML=stage.checks.map(c=>`<li>${escHtml(c)}</li>`).join('');
+ const pct=Math.round((index+1)/d.stages.length*100);document.getElementById('automationProgressText').textContent=`${pct}%`;document.getElementById('automationProgressFill').style.width=`${pct}%`;
+ const play=document.getElementById('automationPlayBtn');if(play&&!window.automationDemoPlaying)play.textContent=index===d.stages.length-1?'▶ Play again':'▶ Play walkthrough';
+}
+function selectAutomationStage(index){stopAutomationDemo();renderAutomationStage(index);}
+function stepAutomationDemo(direction){stopAutomationDemo();const d=automationDemos[window.activeAutomationKey];if(!d)return;let next=window.activeAutomationStage+direction;if(next>=d.stages.length)next=0;if(next<0)next=d.stages.length-1;renderAutomationStage(next);}
+function toggleAutomationPlayback(){
+ const d=automationDemos[window.activeAutomationKey];if(!d)return;
+ if(window.automationDemoPlaying){stopAutomationDemo();const b=document.getElementById('automationPlayBtn');if(b)b.textContent='▶ Resume walkthrough';return;}
+ if(window.activeAutomationStage>=d.stages.length-1)renderAutomationStage(0);
+ window.automationDemoPlaying=true;const b=document.getElementById('automationPlayBtn');if(b)b.textContent='Ⅱ Pause walkthrough';
+ window.automationDemoTimer=setInterval(()=>{const demo=automationDemos[window.activeAutomationKey];if(!demo){stopAutomationDemo();return;}if(window.activeAutomationStage>=demo.stages.length-1){stopAutomationDemo();const btn=document.getElementById('automationPlayBtn');if(btn)btn.textContent='✓ Walkthrough complete · Replay';return;}renderAutomationStage(window.activeAutomationStage+1);const btn=document.getElementById('automationPlayBtn');if(btn)btn.textContent='Ⅱ Pause walkthrough';},2600);
+}
+function replayAutomationDemo(){stopAutomationDemo();renderAutomationDemo(window.activeAutomationKey);}
+
 function switchDashboardTab(tab){window.activeDashboardTab=tab;document.querySelectorAll('[data-dash-tab]').forEach(b=>b.classList.toggle('active',b.dataset.dashTab===tab));renderDashboardTab(tab);}
 function renderDashboardTab(tab){
     const p=projects[window.activeDashboardKey]; const root=document.getElementById('dashboardTabContent'); if(!p||!root)return;
@@ -982,6 +1083,7 @@ function selectDashboardBar(index){const p=projects[window.activeDashboardKey];i
 function selectDashboardRank(label){window.dashboardSelectedLabel=label;const text=document.getElementById('dashboardSelectionText');const item=document.getElementById('dashboardSelectedItem');if(text)text.textContent=`Selected category: ${label}. A connected data model can filter all related visuals.`;if(item)item.textContent=label;}
 
 function closeModal(){
+    if(typeof stopAutomationDemo==='function')stopAutomationDemo();
     const modal=document.getElementById('projectModal');
     modal.classList.remove('open');
     modal.setAttribute('aria-hidden','true');
